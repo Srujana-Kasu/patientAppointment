@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "7f34fbb7-86e2-468f-8646-06f066fe6e57",
+		"name": "PatientAppoitmentApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25921359"
+	},
+	"item": [
+		{
+			"name": "PostAppointments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n\"name\" : \"akshay\",\n\"date\" : \"2022-04-14\",\n\"startTime\" : 5.30,\n\"endTime\":6.30\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/appointments",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"appointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AppointmentsByName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/:name/appointments",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						":name",
+						"appointments"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": "sona"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AppointmentsByDate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/appointments/:date?patientNames=akshay",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"appointments",
+						":date"
+					],
+					"query": [
+						{
+							"key": "patientNames",
+							"value": "akshay"
+						}
+					],
+					"variable": [
+						{
+							"key": "date",
+							"value": "2022-04-14"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
