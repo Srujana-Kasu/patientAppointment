@@ -71,7 +71,7 @@ public class PatientControllerTest {
     @Test
     public void testCreateAppointment(){
         String date ="2023-08-04";
-        AppointmentRequestDTO appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-04",3,4);
+        AppointmentRequestDTO appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-04","3","4");
         AppointmentResponseDTO appointmentResponseDTO = new AppointmentResponseDTO(UUID.randomUUID(),"JohnDoe",true);
         when(service.addPatientAppointment(appointmentRequestDTO)).thenReturn(appointmentResponseDTO);
         assertEquals(appointmentResponseDTO,controller.addAppointment(appointmentRequestDTO));

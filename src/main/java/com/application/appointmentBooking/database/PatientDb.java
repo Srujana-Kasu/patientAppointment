@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class PatientDb {
@@ -21,7 +22,7 @@ public class PatientDb {
 
     public Patient getPatientByName(String patientName){
         for(Patient patient:patientList){
-            if(patientName.equals(patient.getName())){
+            if(patientName.toLowerCase().equals(patient.getName())){
                 return patient;
             }
         }
@@ -29,9 +30,13 @@ public class PatientDb {
     }
 
     public List<Patient> getPatients(List<String> patientNames){
+        //converting patientNames to lower case
+        List<String> patientNamesFormatted = patientNames.stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
         List<Patient> filterPatientList =new ArrayList<>();
         for(Patient patient:patientList){
-            if(patientNames.contains(patient.getName())){
+            if(patientNamesFormatted.contains(patient.getName().toLowerCase())){
                 filterPatientList.add(patient);
             }
         }

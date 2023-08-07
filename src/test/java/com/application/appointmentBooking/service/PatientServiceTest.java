@@ -22,9 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-
-
-
 @SpringBootTest
 public class PatientServiceTest {
 
@@ -58,27 +55,27 @@ public class PatientServiceTest {
         when(patientDb.getPatientByName("JohnDoe")).thenReturn(patient1);
 
         //adding appointment for already exiting patient and date
-        AppointmentRequestDTO appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4",5.0,7.0);
+        AppointmentRequestDTO appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4","5.0","7.0");
         AppointmentResponseDTO expectedDTO = new AppointmentResponseDTO( UUID.randomUUID(),"JohnDoe",true);
         AppointmentResponseDTO actualDTO = patientService.addPatientAppointment(appointmentRequestDTO);
         assertEquals(expectedDTO.isAppointmentCreated(),actualDTO.isAppointmentCreated());
 
         //adding existing appointment
-        appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4",5.0,7.0);
+        appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4","5.0","7.0");
         expectedDTO = new AppointmentResponseDTO( UUID.randomUUID(),"JohnDoe",false);
         actualDTO = patientService.addPatientAppointment(appointmentRequestDTO);
         assertEquals(expectedDTO.isAppointmentCreated(),actualDTO.isAppointmentCreated());
         assertEquals(expectedDTO.getPatientName(),expectedDTO.getPatientName());
 
         //adding conflicting appointment
-        appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4",6.0,6.30);
+        appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4","6.0","6.30");
         expectedDTO = new AppointmentResponseDTO( UUID.randomUUID(),"JohnDoe",false);
         actualDTO = patientService.addPatientAppointment(appointmentRequestDTO);
         assertEquals(expectedDTO.isAppointmentCreated(),actualDTO.isAppointmentCreated());
         assertEquals(expectedDTO.getPatientName(),expectedDTO.getPatientName());
 
         //adding new patient and new appointment
-        appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4",6.0,6.30);
+        appointmentRequestDTO = new AppointmentRequestDTO("JohnDoe","2023-08-4","6.0","6.30");
         when(patientDb.getPatientByName("JohnDoe")).thenReturn(null);
         expectedDTO = new AppointmentResponseDTO( UUID.randomUUID(),"JohnDoe",true);
         actualDTO = patientService.addPatientAppointment(appointmentRequestDTO);

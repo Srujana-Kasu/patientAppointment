@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @Builder
@@ -25,9 +26,11 @@ public class AppointmentRequestDTO {
     private String date;
 
     @NotNull(message = "Appointment start time is required")
-    private double startTime;
+    @Pattern(regexp = "([01]?[0-9]|2[0-3]).[0-5][0-9]")
+    private String startTime;
 
     @NotNull(message = "Appointment end time is required")
-    private double endTime;
+    @Pattern(regexp = "([01]?[0-9]|2[0-3]).[0-5][0-9]")
+    private String endTime;
 
 }

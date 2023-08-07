@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import static java.lang.Double.parseDouble;
+
 @Service
 public class PatientService {
 
@@ -36,10 +38,10 @@ public class PatientService {
         AppointmentResponseDTO appointmentResponseDTO = new AppointmentResponseDTO();
         Patient patient = patientDb.getPatientByName(appointmentRequestDTO.getName());
         String name = appointmentRequestDTO.getName().toLowerCase();
-        double startTime = appointmentRequestDTO.getStartTime();
-        double endTime = appointmentRequestDTO.getEndTime();
+        double startTime = parseDouble(appointmentRequestDTO.getStartTime());
+        double endTime = parseDouble(appointmentRequestDTO.getEndTime());
         String date = appointmentRequestDTO.getDate();
-        if(appointmentRequestDTO.getStartTime() > appointmentRequestDTO.getEndTime()){
+        if(parseDouble(appointmentRequestDTO.getStartTime()) > parseDouble(appointmentRequestDTO.getEndTime())){
             throw new ApiRequestException("appointment startTime cannot be greater than appointment endTime");
         }
         if(!isValid(date)){
@@ -60,7 +62,7 @@ public class PatientService {
         }else {
             Map<String,List<Appointment>> appointmentMap = new HashMap<>();
             List<Appointment> appointmentList = new ArrayList<>();
-            appointmentList.add(new Appointment(appointmentRequestDTO.getStartTime(),appointmentRequestDTO.getEndTime()));
+            appointmentList.add(new Appointment(startTime,endTime));
             appointmentMap.putIfAbsent(date,appointmentList);
             Patient newPatient = Patient.builder().name(appointmentRequestDTO.getName().toLowerCase()).id(UUID.randomUUID()).appointmentMap(appointmentMap).build();
             patientDb.addPatient(newPatient);
@@ -74,6 +76,7 @@ public class PatientService {
         if(patientNames==null || patientNames.size() ==0) {
            patientList = patientDb.getAllPatients();
         }else{
+
             patientList = patientDb.getPatients(patientNames);
         }
         List<DateResponseDTO> newPatientList = new ArrayList<>();

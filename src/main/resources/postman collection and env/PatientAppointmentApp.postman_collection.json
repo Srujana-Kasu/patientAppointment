@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "7f34fbb7-86e2-468f-8646-06f066fe6e57",
-		"name": "PatientAppoitmentApp",
+		"_postman_id": "65d1375e-c04b-4043-9187-d35d2c70b952",
+		"name": "PatientAppointmentApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25921359"
 	},
@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "\n{\n\"name\" : \"akshay\",\n\"date\" : \"2022-04-14\",\n\"startTime\" : 5.30,\n\"endTime\":6.30\n\n}",
+					"raw": "\n{\n\"name\" : \"johnDoe\",\n\"date\" : \"2023-08-05\",\n\"startTime\" : \"07.00\",\n\"endTime\":\"08.30\"\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -49,7 +49,7 @@
 					"variable": [
 						{
 							"key": "name",
-							"value": "sona"
+							"value": "johndoe"
 						}
 					]
 				}
@@ -62,7 +62,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseurl}}/appointments/:date?patientNames=akshay",
+					"raw": "{{baseurl}}/appointments/:date?patientNames=johndoe",
 					"host": [
 						"{{baseurl}}"
 					],
@@ -73,13 +73,13 @@
 					"query": [
 						{
 							"key": "patientNames",
-							"value": "akshay"
+							"value": "johndoe"
 						}
 					],
 					"variable": [
 						{
 							"key": "date",
-							"value": "2022-04-14"
+							"value": "2023-08-05"
 						}
 					]
 				}
